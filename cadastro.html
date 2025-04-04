@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Logos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #000000;
+            font-family: Arial, sans-serif;
+        }
+        .cadastro-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .logo {
+            display: block;
+            margin: 0 auto 20px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+        <div class="container">
+            <div id="mensagem">
+                <script>
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const msg = urlParams.get('msg');
+                    const tipo = urlParams.get('tipo');
+                    
+                    if (msg) {
+                        document.write(`<div class="alert alert-${tipo}">${msg}</div>`);
+                    }
+                </script>
+            </div>      
+    <div class="container">
+        <div class="cadastro-container">
+            <img src="logo_projeto_final.jpg" alt="Logos" class="logo">
+            <h2 class="text-center">Cadastro</h2>
+            <form action="cadastro.php" method="POST" onsubmit="return validarSenha()">
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" class="form-control" name="nome" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">E-mail</label>
+                    <input type="email" class="form-control" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="senha" class="form-label">Senha</label>
+                    <input type="password" class="form-control" id="senha" name="senha" required>
+                </div>
+                <div class="mb-3">
+                    <label for="confirm_senha" class="form-label">Confirmar Senha</label>
+                    <input type="password" class="form-control" id="confirm_senha" name="confirm_senha" required>
+
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
+                <div id="mensagem" class="alert mt-3" style="display: none;"></div>
+            </form>
+            </form>
+            <div class="text-center mt-3">
+                <a href="index.html">Já tem uma conta? Faça login</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function validarSenha() {
+            var senha = document.getElementById("senha").value;
+            var confirmSenha = document.getElementById("confirm_senha").value;
+            var mensagem = document.getElementById("mensagem");
+    
+            if (senha !== confirmSenha) {
+                mensagem.innerHTML = "❌ As senhas não coincidem!";
+                mensagem.className = "alert alert-danger";
+                mensagem.style.display = "block";
+                return false; 
+            }
+    
+            mensagem.style.display = "none";
+            return true; 
+        }
+    </script>
+    
+
+    </script>
+    
+    <script>
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const msg = urlParams.get('msg');
+            const tipo = urlParams.get('tipo');
+    
+            if (msg) {
+                mostrarMensagem(msg, tipo);
+            }
+        };
+    </script>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Logos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #000000;
+            font-family: Arial, sans-serif;
+        }
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .logo {
+            display: block;
+            margin: 0 auto 20px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="mensagem" class="mensagem-container" style="display: none;">
+        <span id="mensagem-icone"></span>
+        <span id="mensagem-texto"></span>
+        <button onclick="fecharMensagem()">×</button>
+    </div>
+    
+    <style>
+        .mensagem-container {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.5s ease-in-out;
+            transition: opacity 0.3s ease-in-out;
+        }
+    
+        .mensagem-container button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    
+        .mensagem-container.alert-success { background-color: #28a745; } 
+        .mensagem-container.alert-danger { background-color: #dc3545; } 
+        .mensagem-container.alert-warning { background-color: #ffc107; color: black; } 
+        .mensagem-container.alert-info { background-color: #17a2b8; } 
+    
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+    </style>
+    
+    <script>
+        function getParametroURL(nome) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(nome);
+        }
+    
+        function fecharMensagem() {
+            document.getElementById("mensagem").style.opacity = "0";
+            setTimeout(() => {
+                document.getElementById("mensagem").style.display = "none";
+            }, 300);
+        }
+    
+        window.onload = function() {
+            const mensagem = getParametroURL('msg');
+            const tipo = getParametroURL('tipo');
+    
+            if (mensagem && tipo) {
+                const divMensagem = document.getElementById("mensagem");
+                const spanTexto = document.getElementById("mensagem-texto");
+                const spanIcone = document.getElementById("mensagem-icone");
+    
+                spanTexto.innerText = mensagem;
+                divMensagem.classList.add("alert-" + tipo);
+    
+                // Adiciona ícone correspondente ao tipo de mensagem
+                const icones = {
+                    "success": "✅", // Sucesso
+                    "danger": "❌",  // Erro
+                    "warning": "⚠️", // Atenção
+                    "info": "ℹ️"     // Informação
+                };
+                spanIcone.innerText = icones[tipo] || "ℹ️";
+    
+                divMensagem.style.display = "flex";
+    
+                // Remove a mensagem após 5 segundos
+                setTimeout(fecharMensagem, 5000);
+            }
+        };
+    </script>
+    
+
+    <div class="container">
+        <div class="login-container">
+            <img src="logo_projeto_final.jpg" alt="Logos" class="logo">
+            <h2 class="text-center">Login</h2>
+            <form action="login.php" method="POST">
+                <div class="mb-3">
+                    <label for="email" class="form-label">E-mail</label>
+                    <input type="email" class="form-control" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Senha</label>
+                    <input type="password" class="form-control" name="senha" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Entrar</button>
+            </form>
+            <div class="text-center mt-3">
+                <a href="esqueci_senha.html">Esqueci minha senha</a> <a href="cadastro.html">Criar conta</a>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
